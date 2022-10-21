@@ -7,6 +7,23 @@ import { getTypeColor } from '../../services/PokemonService';
 
 function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
+  const [searchTerms, setSearchTerms] = useState('');
+
+  
+  const filter = (e) => {
+    const keyword = e.target.value;
+  if (keyword !== '') {
+    const results = pokemons.filter((pokemon) => {
+      return pokemon.name.toLowerCase().startsWith(keyword.toLowerCase()) || pokemon.id.toString() === keyword;
+    });
+    setFilteredPokemons(results);
+  } else {
+    setFilteredPokemons(pokemons);
+  }
+
+  setSearchTerms(keyword);
+};
 
   useEffect(() => {
     axios
@@ -14,6 +31,7 @@ function Pokedex() {
     .then(res => {
       console.log(res)
       setPokemons(res.data);
+      setFilteredPokemons(res.data);
     })
     .catch(err => {
       console.log(err);
@@ -24,7 +42,7 @@ function Pokedex() {
     <>
       <div className='wrapper'>
         <h1>Pokédex</h1>
-        <input className='search-bar' placeholder='search'></input>
+        <input className='search-bar' value={searchTerms} onChange={filter} placeholder='search'></input>
         <div className='button-wrapper'>
           <Button className='my-team'>Mijn team</Button>
           <Button className='favorites'>Favorieten</Button>
@@ -32,7 +50,7 @@ function Pokedex() {
         <div>
           <ul className='list-group'>
             {
-              pokemons.map(pokemon => <li className='list-group-item' key={pokemon.id}>
+              filteredPokemons.map(pokemon => <li className='list-group-item' key={pokemon.id}>
                   <div className='pokemon-list-item'>
                     <img alt={pokemon.name} src={pokemon.sprites.front_default} className='pokemon-image flex-item'/>
                     <div className='flex-item pokemon-id-item'><p className='pokemon-name'>{pokemon.name}</p><p className='pokemon-id'>Nr. {pokemon.id}</p></div>
