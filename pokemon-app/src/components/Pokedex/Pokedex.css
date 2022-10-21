@@ -1,3 +1,10 @@
+.wrapper {
+    width: 375px;
+    height: 812px;
+    background: #F9F9F9;
+    font-size: 70%;
+}
+
 .list-group {
     border-radius: 1rem;
 }
@@ -16,6 +23,8 @@
 }
 
 .pokemon-list-item {
+    width: 100%;
+    float: left;
     display: flex;
     column-gap: 1rem;
     vertical-align: center;
@@ -23,17 +32,17 @@
 }
 
 .pokemon-id-item {
-    flex: 0 0 5%; 
+  width: 20%;
 }
 
 .flex-item {
-    margin: auto;
+    width: 100%;
 }
 
 .pokemon-image {
-    width: 100px;
-    height: 100px;
-    flex: 0 0 25%; 
+    width: 20%;
+    height: 20%;
+    flex: 0 0 20%; 
 }
 
 .tag {
@@ -41,10 +50,14 @@
     border-width: 0.2rem;
     color: white;
     border-radius: 5rem;
-    width: 4rem;
+    width: 3.5rem;
     text-align: center;
     margin: 0.2rem;
     text-transform: capitalize;
+}
+
+.central-content {
+    text-align: center;
 }
 
 .grass {
@@ -64,4 +77,40 @@
 .pokemon-name {
     text-transform: capitalize;
     font-weight: bold;
+}
+
+.search-bar {
+    margin-bottom: 1rem;
+    width: 94%;
+}
+
+.button {
+    width: 46%;
+    height: 7rem;
+    margin: 1%;
+    color: white;
+}
+
+.my-team {
+    position: absolute;
+    width: 167px;
+    height: 100px;
+    left: 16px;
+    top: 200px;
+
+    /* Purple Gradient */
+    background: linear-gradient(109.73deg, #46469C 0%, #7E32E0 100%);
+    border-radius: 10px;
+}
+
+.favorites {
+    position: absolute;
+    width: 167px;
+    height: 100px;
+    left: 192px;
+    top: 200px;
+    
+    /* Green Gradient */
+    background: linear-gradient(109.73deg, #65CB9A 0%, #15D0DC 100%);
+    border-radius: 10px;
 }

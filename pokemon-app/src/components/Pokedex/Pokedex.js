@@ -22,27 +22,29 @@ function Pokedex() {
 
   return (
     <>
-      <h1>Pokédex</h1>
-      <input placeholder='search'></input>
-      <Button>My team</Button>
-      <Button>Favorites</Button>
-      <div>
-        <ul className='list-group'>
-          {
-            pokemons.map(pokemon => <li className='list-group-item' key={pokemon.id}>
-                <div className='pokemon-list-item'>
-                  <img alt={pokemon.name} src={pokemon.sprites.front_default} className='pokemon-image flex-item'/>
-                   <div className='flex-item pokemon-id-item'><p className='pokemon-name'>{pokemon.name}</p><p className='pokemon-id'>Nr. {pokemon.id}</p></div>
-                   <div className='types flex-item'>
-                      {
-                        pokemon.types.map(type => 
-                            <p className='tag' style={getTypeColor(type.type.name)} key={type.slot}>{type.type.name}</p>)
-                      }
+      <div className='wrapper'>
+        <h1>Pokédex</h1>
+        <input placeholder='search'></input>
+        <Button>My team</Button>
+        <Button>Favorites</Button>
+        <div>
+          <ul className='list-group'>
+            {
+              pokemons.map(pokemon => <li className='list-group-item' key={pokemon.id}>
+                  <div className='pokemon-list-item'>
+                    <img alt={pokemon.name} src={pokemon.sprites.front_default} className='pokemon-image flex-item'/>
+                    <div className='flex-item pokemon-id-item'><p className='pokemon-name'>{pokemon.name}</p><p className='pokemon-id'>Nr. {pokemon.id}</p></div>
+                    <div className='types flex-item'>
+                        {
+                          pokemon.types.map(type => 
+                              <p className='tag' style={getTypeColor(type.type.name)} key={type.slot}>{type.type.name}</p>)
+                        }
+                      </div>
                     </div>
-                  </div>
-              </li>)
-          }
-        </ul>
+                </li>)
+            }
+          </ul>
+        </div>
       </div>
     </>
   )
