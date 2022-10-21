@@ -24,9 +24,11 @@ function Pokedex() {
     <>
       <div className='wrapper'>
         <h1>Pokédex</h1>
-        <input placeholder='search'></input>
-        <Button>My team</Button>
-        <Button>Favorites</Button>
+        <input className='search-bar' placeholder='search'></input>
+        <div className='button-wrapper'>
+          <Button className='my-team'>Mijn team</Button>
+          <Button className='favorites'>Favorieten</Button>
+        </div>
         <div>
           <ul className='list-group'>
             {
