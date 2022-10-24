@@ -118,3 +118,14 @@
 .button-wrapper {
     text-align: center;
 }
+
+.sort-icon {
+    width: 30px;
+    height: 30px;
+}
+
+#dropdown-basic {
+    /* reset default styles */
+    all: initial;
+    float: right;
+}

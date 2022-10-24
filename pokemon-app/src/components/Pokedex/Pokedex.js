@@ -4,13 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Pokedex.css';
 import { Button } from 'react-bootstrap';
 import { getTypeColor } from '../../services/PokemonService';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [searchTerms, setSearchTerms] = useState('');
+  // const [typeOfSort, setTypeOfSort] = useState('');
 
-  
   const filter = (e) => {
     const keyword = e.target.value;
   if (keyword !== '') {
@@ -24,6 +25,20 @@ function Pokedex() {
 
   setSearchTerms(keyword);
 };
+
+const sort = (typeOfSort) => {
+  switch(typeOfSort) {
+    case 'AlphabeticAscending': setFilteredPokemons([...filteredPokemons].sort((a, b) => a.name > b.name ? 1 : -1));
+    break;
+    case 'AlphabeticDescending': setFilteredPokemons([...filteredPokemons].sort((a, b) => a.name > b.name ? -1 : 1));
+    break;
+    case 'NumericAscending': setFilteredPokemons([...filteredPokemons].sort((a, b) => a.id - b.id));
+    break;
+    case 'NumericDescending': setFilteredPokemons([...filteredPokemons].sort((a, b) => b.id - a.id));
+    break;
+    default: return;
+  }
+}
 
   useEffect(() => {
     axios
@@ -40,7 +55,20 @@ function Pokedex() {
 
   return (
     <>
-      <div className='wrapper'>
+      <div className='wrapper'>       
+      <Dropdown>
+      <Dropdown.Toggle id="dropdown-basic">
+        <img alt='sort-icon' className='sort-icon' src='sort-icon.png' />
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => sort('AlphabeticAscending')}>Alfabetisch oplopend</Dropdown.Item>
+        <Dropdown.Item onClick={() => sort('AlphabeticDescending')}>Alfabetisch aflopen</Dropdown.Item>
+        <Dropdown.Item onClick={() => sort('NumericAscending')}>Numeriek oplopend</Dropdown.Item>
+        <Dropdown.Item onClick={() => sort('NumericDescending')}>Numeriek aflopen</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+        
         <h1>Pokédex</h1>
         <input className='search-bar' value={searchTerms} onChange={filter} placeholder='search'></input>
         <div className='button-wrapper'>
@@ -57,7 +85,7 @@ function Pokedex() {
                     <div className='types flex-item'>
                         {
                           pokemon.types.map(type => 
-                              <p className='tag' style={getTypeColor(type.type.name)} key={type.slot}>{type.type.name}</p>)
+                            <p className='tag' style={getTypeColor(type.type.name)} key={type.slot}>{type.type.name}</p>)
                         }
                       </div>
                     </div>
